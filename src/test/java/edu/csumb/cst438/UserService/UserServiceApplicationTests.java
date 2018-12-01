@@ -1,4 +1,4 @@
-package edu.csumb.cst438.UserService;
+package edu.csumb.cst438.userservice;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

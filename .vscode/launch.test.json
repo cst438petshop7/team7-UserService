@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "UserService",
+                "projectName": "UserService",
+                "workingDirectory": "c:\\Users\\bcast\\Desktop\\team7-UserService",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "UserService",
+                "projectName": "UserService",
+                "workingDirectory": "c:\\Users\\bcast\\Desktop\\team7-UserService",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
