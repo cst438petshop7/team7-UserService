@@ -62,11 +62,11 @@ public class ManagerTester{
 
     private List<User> FiveStandardUsersStub(){
         List<User> result = new ArrayList<User>();
-        User u1 = new User("1",new Username("admin1"),new Password("admin1"),new Credit(100.00),new Cart(Arrays.asList("Snip","Wallet","Glue")));
-        User u2 = new User("2",new Username("admin2"),new Password("admin2"),new Credit(200.00),new Cart(Arrays.asList("Boke","Bizza","Barlic Bread")));
-        User u3 = new User("3",new Username("admin3"),new Password("admin3"),new Credit(300.00),new Cart(Arrays.asList("Bacos","Bortas","Borutos")));
-        User u4 = new User("4",new Username("admin4"),new Password("admin4"),new Credit(400.00),new Cart(Arrays.asList("Buesadilla","Bopes","Bozole")));
-        User u5 = new User("5",new Username("admin5"),new Password("admin5"),new Credit(500.00),new Cart(Arrays.asList("Bepsi","Balsa","Bequila")));
+        User u1 = new User("1",new Username("admin1"),new Password("admin1"),new Credit(100),new Cart(Arrays.asList("Snip","Wallet","Glue")));
+        User u2 = new User("2",new Username("admin2"),new Password("admin2"),new Credit(200),new Cart(Arrays.asList("Boke","Bizza","Barlic Bread")));
+        User u3 = new User("3",new Username("admin3"),new Password("admin3"),new Credit(300),new Cart(Arrays.asList("Bacos","Bortas","Borutos")));
+        User u4 = new User("4",new Username("admin4"),new Password("admin4"),new Credit(400),new Cart(Arrays.asList("Buesadilla","Bopes","Bozole")));
+        User u5 = new User("5",new Username("admin5"),new Password("admin5"),new Credit(500),new Cart(Arrays.asList("Bepsi","Balsa","Bequila")));
 
         result = Arrays.asList(u1,u2,u3,u4,u5);
         return result;
