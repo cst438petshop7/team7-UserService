@@ -1,42 +1,37 @@
 package edu.csumb.cst438.userservice.api;
 
-import java.util.List;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import edu.csumb.cst438.userservice.api.users.Cart;
-import edu.csumb.cst438.userservice.api.users.Credit;
-import edu.csumb.cst438.userservice.api.users.Password;
 import edu.csumb.cst438.userservice.api.users.User;
-import edu.csumb.cst438.userservice.api.users.Username;
 import edu.csumb.cst438.userservice.business.Manager;
 
 @RestController
-public class UserController<User> {
+public class UserController {
     @Autowired
     Manager manager;
 
-    @GetMapping("/username/{username}")
+    @GetMapping("/users/{username}/")
     @ResponseBody
-    List<User> getUsers(@PathVariable String username){
-        String check 
-        List<User> result = callDB(username);
-        return result;
+    Boolean getUsers(@PathVariable String username){
+        User result = callDB(username);
+        if(result.getUsername().getUsername() == username){return true;}
+        return false;
     }
 
-     private List<Hero> callDB (@PathVariable String username) {
-         String uri = "http://localhost:8081/username";
+     private User callDB (String username) {
+         String uri = "https://shopdb-service.herokuapp.com/username/" + username;
          RestTemplate restTemplate = new RestTemplate();
-         ResponseEntity<List<User>> result = restTemplate.exchange(uri,
+         ResponseEntity<User> result = restTemplate.exchange(uri,
          HttpMethod.GET,null, 
-         new ParameterizedTypeReference<List<Hero>>(){});
+         new ParameterizedTypeReference<User>(){});
          return result.getBody();
     }
 }

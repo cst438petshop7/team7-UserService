@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.internal.runners.statements.ExpectException;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ import edu.csumb.cst438.userservice.api.users.Credit;
 import edu.csumb.cst438.userservice.api.users.Password;
 import edu.csumb.cst438.userservice.api.users.User;
 import edu.csumb.cst438.userservice.api.users.Username;
+import edu.csumb.cst438.userservice.business.Manager;
 import edu.csumb.cst438.userservice.data.UserDBClient;
 
 @RunWith(SpringRunner.class)

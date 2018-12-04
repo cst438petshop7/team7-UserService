@@ -43,14 +43,13 @@ public class User {
         return this.id;
     }
 
-    public Username getUsername() {
+    public Username getUsername(){
         return this.username;
     }
     
-    public Password getPassword() {
-    	return this.password;
+    public Password getPassword(){
+        return this.password;
     }
-
     public Cart getCartItems() {
         return this.cart;
     }
