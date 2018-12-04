@@ -18,11 +18,14 @@ public class UserController {
     @Autowired
     Manager manager;
 
-    @GetMapping("/users/{username}/")
+    @GetMapping("/users/{username}")
     @ResponseBody
     Boolean getUsers(@PathVariable String username){
         User result = callDB(username);
-        if(result.getUsername().getUsername() == username){return true;}
+        if(result!=null){
+            if(result.getUsername().getUsername()==username){return true;}
+            else{return false;}
+        }
         return false;
     }
 
