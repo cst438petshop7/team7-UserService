@@ -18,23 +18,25 @@ public class UserController {
     @Autowired
     Manager manager;
 
+    //@RequestMapping(value="/users/{username}",method=RequestMethod.POST)
     @GetMapping("/users/{username}")
     @ResponseBody
     Boolean getUsers(@PathVariable String username){
         User result = callDB(username);
         if(result!=null){
-            if(result.getUsername().getUsername()==username){return true;}
-            else{return false;}
+            //if(result.getUsername().getUsername()!=username){return false;}
+            //else{return true;}
+            return true;
         }
-        return false;
+        else{return false;}
     }
 
-     private User callDB (String username) {
-         String uri = "https://shopdb-service.herokuapp.com/username/" + username;
+     private User callDB (String name) {
+         String uri = "https://shopdb-service.herokuapp.com/username/"+name;
          RestTemplate restTemplate = new RestTemplate();
-         ResponseEntity<User> result = restTemplate.exchange(uri,
+         ResponseEntity<User> user = restTemplate.exchange(uri,
          HttpMethod.GET,null, 
          new ParameterizedTypeReference<User>(){});
-         return result.getBody();
+         return user.getBody();
     }
 }
