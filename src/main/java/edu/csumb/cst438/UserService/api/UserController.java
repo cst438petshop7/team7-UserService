@@ -25,9 +25,9 @@ public class UserController {
     @Autowired
     Manager manager;
 
-    @RequestMapping(path="/login/", method=RequestMethod.POST)
+    @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
-    ResponseEntity<User> getUsers(@RequestBody User user){
+    ResponseEntity<User> getUser(@RequestBody User user){
         User result = callUserDB(user.getUsername().getUsername());
         if(result==null){
                 return new ResponseEntity<User>(result,HttpStatus.NOT_FOUND);
