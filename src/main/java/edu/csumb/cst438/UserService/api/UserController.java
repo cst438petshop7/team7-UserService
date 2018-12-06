@@ -27,15 +27,15 @@ public class UserController {
 
     @RequestMapping(path="/login/{username}", method=RequestMethod.POST)
     @ResponseBody
-    ResponseEntity<User> getUsers(@PathVariable String username, @RequestBody User user){
+    ResponseEntity<String> getUsers(@PathVariable String username, @RequestBody User user){
         User result = callUserDB(username);
         if(result==null){
-                return new ResponseEntity<User>(result,HttpStatus.NOT_FOUND);
+                return new ResponseEntity<String>("result is null",HttpStatus.NOT_FOUND);
         }
         if(result.getUsername().getUsername() == user.getUsername().getUsername() && result.getPassword().getPassword() == user.getPassword().getPassword()){
-            return new ResponseEntity<User> (result,HttpStatus.OK);
+            return new ResponseEntity<String> ("Username and password found",HttpStatus.OK);
         }
-        return new ResponseEntity<User>(user,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String>("result ain't null but never found",HttpStatus.NOT_FOUND);
     }
 
      private User callUserDB (String name) {
