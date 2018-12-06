@@ -19,26 +19,23 @@ import org.springframework.web.client.RestTemplate;
 import edu.csumb.cst438.userservice.api.users.User;
 import edu.csumb.cst438.userservice.business.Manager;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 @RestController
 public class UserController {
     @Autowired
     Manager manager;
 
-    @RequestMapping(path="/users/{username}", method=RequestMethod.POST)
+    @RequestMapping(path="/login/{username}", method=RequestMethod.POST)
     @ResponseBody
-    ResponseEntity<String> getUsers(@PathVariable String username, @RequestBody List<User> users){
+    ResponseEntity<User> getUsers(@PathVariable String username, @RequestBody User user){
         User result = callUserDB(username);
         if(result==null){
-                return new ResponseEntity<String>("Username and Password Required",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<User>(result,HttpStatus.NOT_FOUND);
         }
-        for (User u : users){
-            if(result.getUsername().getUsername() == u.getUsername().getUsername() && result.getPassword().getPassword() == u.getPassword().getPassword()){
-                return new ResponseEntity<String> ("You are logged in",HttpStatus.OK);
-            }
-            return new ResponseEntity<String>("Username or Password is incorrect",HttpStatus.NOT_FOUND);
+        if(result.getUsername().getUsername() == user.getUsername().getUsername() && result.getPassword().getPassword() == user.getPassword().getPassword()){
+            return new ResponseEntity<User> (result,HttpStatus.OK);
         }
-        return null;
+        return new ResponseEntity<User>(user,HttpStatus.NOT_FOUND);
     }
 
      private User callUserDB (String name) {
