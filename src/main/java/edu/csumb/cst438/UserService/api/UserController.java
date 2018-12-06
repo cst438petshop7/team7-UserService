@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import edu.csumb.cst438.userservice.api.users.User;
 import edu.csumb.cst438.userservice.business.Manager;
 
-
+@CrossOrigin("*")
 @RestController
 public class UserController {
     @Autowired
