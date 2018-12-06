@@ -32,7 +32,7 @@ public class UserController {
         if(result==null){
                 return new ResponseEntity<String>("result is null",HttpStatus.NOT_FOUND);
         }
-        if(result.getUsername().getUsername() == user.getUsername().getUsername()) {//&& result.getPassword().getPassword() == user.getPassword().getPassword()){
+        if(result.getUsername().getUsername().equals( user.getUsername().getUsername()) && result.getPassword().getPassword().equals(user.getPassword().getPassword())){
             return new ResponseEntity<String> ("Username and password found",HttpStatus.OK);
         }
         return new ResponseEntity<String>("result ain't null but never found",HttpStatus.NOT_FOUND);
