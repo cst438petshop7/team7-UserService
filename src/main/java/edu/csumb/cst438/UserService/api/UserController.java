@@ -25,17 +25,17 @@ public class UserController {
     @Autowired
     Manager manager;
 
-    @RequestMapping(path="/login/{username}", method=RequestMethod.POST)
+    @RequestMapping(value="/login", method=RequestMethod.POST)
     @ResponseBody
-    ResponseEntity<String> getUser(@PathVariable String username, @RequestBody User user){
-        User result = callUserDB(username);
+    ResponseEntity<User> getUser(@RequestBody User user){
+        User result = callUserDB(user.getUsername().getUsername());
         if(result==null){
-                return new ResponseEntity<String>("result is null",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<User>(result,HttpStatus.NOT_FOUND);
         }
-        if(result.getUsername().getUsername().equals( user.getUsername().getUsername()) && result.getPassword().getPassword().equals(user.getPassword().getPassword())){
-            return new ResponseEntity<String> ("Username and password found",HttpStatus.OK);
+        if(result.getUsername().getUsername().equals(user.getUsername().getUsername()) && result.getPassword().getPassword().equals(user.getPassword().getPassword())){
+            return new ResponseEntity<User> (result,HttpStatus.OK);
         }
-        return new ResponseEntity<String>("result ain't null but never found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<User>(user,HttpStatus.NOT_FOUND);
     }
 
      private User callUserDB (String name) {
