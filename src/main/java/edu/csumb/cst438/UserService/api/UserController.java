@@ -1,11 +1,16 @@
 package edu.csumb.cst438.userservice.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -13,25 +18,29 @@ import org.springframework.web.client.RestTemplate;
 import edu.csumb.cst438.userservice.api.users.User;
 import edu.csumb.cst438.userservice.business.Manager;
 
+
 @RestController
 public class UserController {
     @Autowired
     Manager manager;
 
-    //@RequestMapping(value="/users/{username}",method=RequestMethod.POST)
-    @GetMapping("/users/{username}")
+    @RequestMapping(path="/users/{username}", method=RequestMethod.POST)
     @ResponseBody
-    Boolean getUsers(@PathVariable String username){
-        User result = callDB(username);
-        if(result!=null){
-            //if(result.getUsername().getUsername()!=username){return false;}
-            //else{return true;}
-            return true;
+    ResponseEntity<String> getUsers(@PathVariable String username, @RequestBody List<User> users){
+        User result = callUserDB(username);
+        if(result==null){
+                return new ResponseEntity<String>("Username and Password Required",HttpStatus.NOT_FOUND);
         }
-        else{return false;}
+        for (User u : users){
+            if(result.getUsername().getUsername() == u.getUsername().getUsername() && result.getPassword().getPassword() == u.getPassword().getPassword()){
+                return new ResponseEntity<String> ("You are logged in",HttpStatus.OK);
+            }
+            return new ResponseEntity<String>("Username or Password is incorrect",HttpStatus.NOT_FOUND);
+        }
+        return null;
     }
 
-     private User callDB (String name) {
+     private User callUserDB (String name) {
          String uri = "https://shopdb-service.herokuapp.com/username/"+name;
          RestTemplate restTemplate = new RestTemplate();
          ResponseEntity<User> user = restTemplate.exchange(uri,
